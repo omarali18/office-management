@@ -5,8 +5,9 @@ import com.project.officeManagement.entity.Employee;
 import com.project.officeManagement.enums.EmployeeRole;
 import com.project.officeManagement.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -27,6 +28,29 @@ public class EmployeeService {
                 .build();
 
         return employeeRepository.save(employee);
+    }
+
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public Employee getEmployeeById(int employeeId) {
+        return employeeRepository.getOne(employeeId);
+    }
+
+    public Employee updateEmployee(EmployeeRequestDto dto, int employeeId) {
+        Employee e = employeeRepository.findById(employeeId).get();
+            e.setName(dto.getName());
+            e.setEmail(dto.getEmail());
+            e.setPhoneNumber(dto.getPhoneNumber());
+            e.setEmployeeRole(EmployeeRole.valueOf(dto.getEmployeeRole().toUpperCase()));
+            return employeeRepository.save(e);
+
+    }
+
+    public String deleteEmployee(int employeeId) {
+        employeeRepository.deleteById(employeeId);
+        return "Employee deleted successfully";
     }
 }
 
