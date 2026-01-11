@@ -22,6 +22,7 @@ public class FileService {
 
     private static final String UPLOAD_DIR = "uploads/";
 
+
     public FileRequestDto uploadFile(MultipartFile file) {
 
         if (file.isEmpty()) {
@@ -29,20 +30,21 @@ public class FileService {
         }
 
         try {
-            // Create directory if not exists
             File directory = new File(UPLOAD_DIR);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
 
-            // Generate unique file name
-            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            // file name
+//            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            String fileName = file.getOriginalFilename();
             Path filePath = Paths.get(UPLOAD_DIR + fileName);
+            System.out.println("Omar Ali_" + " " + filePath + " " + fileName);
 
-            // Save file to local directory
+            // Save file
             Files.write(filePath, file.getBytes());
 
-            // Save metadata to DB
+            // Save to database
             FileEntity fileEntity = FileEntity.builder()
                     .fileName(fileName)
                     .fileType(file.getContentType())
