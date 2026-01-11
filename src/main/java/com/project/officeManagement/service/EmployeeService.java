@@ -48,9 +48,10 @@ public class EmployeeService {
 
     }
 
-    public String deleteEmployee(int employeeId) {
+    public String deleteEmployeeById(int employeeId) {
         employeeRepository.deleteById(employeeId);
         return "Employee deleted successfully";
     }
+
 }
 
