@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-//    private final PaymentService paymentService;
+    private final PaymentService paymentService;
 
     @Transactional(
             propagation = Propagation.REQUIRED,
@@ -24,22 +24,22 @@ public class OrderService {
     )
     public OrderEntity createOrder(OrderRequestDto dto) {
 
-        OrderEntity order = OrderEntity.builder()
+        OrderEntity order_1 = OrderEntity.builder()
                 .productName(dto.getProductName())
                 .amount(dto.getAmount())
                 .status("CREATED")
                 .build();
 
-        return orderRepository.save(order);
+        return orderRepository.save(order_1);
     }
 
     @Transactional
     public OrderEntity markOrderPaid(Long orderId) {
-        OrderEntity order = orderRepository.findById(orderId)
+        OrderEntity order_1 = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
-        order.setStatus("PAID");
-        return orderRepository.save(order);
+        order_1.setStatus("PAID");
+        return orderRepository.save(order_1);
     }
 }
 
