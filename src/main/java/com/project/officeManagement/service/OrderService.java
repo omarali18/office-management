@@ -24,22 +24,22 @@ public class OrderService {
     )
     public OrderEntity createOrder(OrderRequestDto dto) {
 
-        OrderEntity order_1 = OrderEntity.builder()
+        OrderEntity order = OrderEntity.builder()
                 .productName(dto.getProductName())
                 .amount(dto.getAmount())
                 .status("CREATED")
                 .build();
 
-        return orderRepository.save(order_1);
+        return orderRepository.save(order);
     }
 
     @Transactional
     public OrderEntity markOrderPaid(Long orderId) {
-        OrderEntity order_1 = orderRepository.findById(orderId)
+        OrderEntity order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
-        order_1.setStatus("PAID");
-        return orderRepository.save(order_1);
+        order.setStatus("PAID");
+        return orderRepository.save(order);
     }
 }
 
