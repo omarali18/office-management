@@ -1,5 +1,6 @@
 package com.project.officeManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,5 +22,6 @@ public class ProfileEntity {
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity userEntity;
+    @JsonBackReference
+    private UserEntity user;
 }

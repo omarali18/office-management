@@ -1,5 +1,6 @@
 package com.project.officeManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,5 +23,6 @@ public class UserEntity {
     @OneToOne(mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
+    @JsonManagedReference
     private ProfileEntity profileEntity;
 }

@@ -22,9 +22,14 @@ public class UserService {
         ProfileEntity profileEntity = ProfileEntity.builder()
                 .address(dto.getProfile().getAddress())
                 .phone(dto.getProfile().getPhone())
-                .userEntity(userEntity)
+                .user(userEntity)
                 .build();
+
+        userEntity.setProfileEntity(profileEntity);
+
+//        userRepository.save(userEntity);
 
         return userRepository.save(userEntity);
     }
+
 }
