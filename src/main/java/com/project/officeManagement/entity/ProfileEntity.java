@@ -9,18 +9,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "profiles")
+public class ProfileEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String email;
+    private String address;
+    private String phone;
 
-    @OneToOne(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private ProfileEntity profileEntity;
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity userEntity;
 }
