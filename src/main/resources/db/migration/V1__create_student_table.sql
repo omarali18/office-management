@@ -1,0 +1,7 @@
+-CREATE TABLE student (
+     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+     name VARCHAR(50) NOT NULL,
+     email VARCHAR(30) NOT NULL,
+     phoneNumber VARCHAR(20)
+     newTable VARCHAR(20)
+ );
